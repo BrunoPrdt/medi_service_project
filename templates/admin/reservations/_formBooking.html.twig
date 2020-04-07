@@ -1,0 +1,48 @@
+{{ form_start(form) }}
+<div class="row">
+    <div class="form-group col-md-4">
+        {{ form_label(form.user, 'Utilisateur : ') }} {{ form_widget(form.user, {"attr": {
+            "placeholder" : "Minimum 1 caractères"}}) }}
+        <small>{{ form_help(form.user) }}</small>
+    </div>
+    <div class="form-group col-md-4">
+        {{ form_label(form.prospect, 'Client : ') }} {{ form_widget(form.prospect, {"attr": {
+            "placeholder" : "Minimum 1 caractères"}}) }}
+        <small>{{ form_help(form.prospect) }}</small>
+    </div>
+    <div>
+        <input type="hidden" name="article" value="{{ article.id }}">
+    </div>
+    <div>
+        <input type="hidden" name="_token" value="{{ csrf_token('booking') }}">
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-3">
+        {{ form_label(form.viewDate, 'Voir les dates occupées : ') }} {{ form_widget(form.viewDate) }}
+        <small>{{ form_help(form.viewDate) }}</small>
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.loanDate, 'Date de prêt : ') }} {{ form_widget(form.loanDate) }}
+        <small>{{ form_help(form.loanDate) }}</small>
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.returnDate, 'Date de retour : ') }} {{ form_widget(form.returnDate) }}
+        <small>{{ form_help(form.returnDate) }}</small>
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.availabilityDate, 'Date de disponibilté : ') }} {{ form_widget(form.availabilityDate) }}
+        <small>{{ form_help(form.availabilityDate) }}</small>
+    </div>
+    <div class="form-group col-md-6">
+        {{ form_label(form.returnComment, 'Commentaire de retour : ') }} {{ form_widget(form.returnComment) }}
+        <small>{{ form_help(form.returnComment) }}</small>
+    </div>
+    <div class="form-group col-md-3">
+        {{ form_label(form.realReturnDate, 'Retour validé le : ') }} {{ form_widget(form.realReturnDate) }}
+        <small>{{ form_help(form.realReturnDate) }}</small>
+    </div>
+</div>
+<button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

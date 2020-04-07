@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!--------------------------------- CDN import ----------------------------------------->
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <!-- font awesome -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <!-- date picker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha256-siyOpF/pBWUPgIcQi17TLBkjvNgNQArcmwJB8YvkAgg=" crossorigin="anonymous" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha256-bqVeqGdJ7h/lYPq6xrPv/YGzMEb6dNxlfiTUHSgRCp8=" crossorigin="anonymous"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-------------------------- internal CSS import ---------------------------------------->
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/animations.css') }}" rel="stylesheet" />
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<!--Vertical nav-->
+<div id="navPosition">
+    <div class="btn-group-vertical btn-group-xs">
+        <a class="btn btn-custom1" href="#"><i class="fa"></i></a>
+        {% if app.user %}
+
+
+        {% endif %}
+    </div>
+</div>
+<!-- END vertical nav -->
+
+<section class="mb-5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5"style="height: 15vh">
+        <a class="navbar-brand" href="{{ path('home') }}">Medi-Service - Accueil</a>
+        <div id="mySidepanel" class="sidepanel">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            {% if app.user %}
+            <a class="nav-link" href="{{ path('articles_index') }}">Articles</a>
+            <a class="nav-link" href="{{ path('prospects_index') }}">Clients</a>
+            <a class="nav-link" href="{{ path('reservations_index') }}">Réservations</a>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <a class="nav-link" href="{{ path('users_index') }}">Utilisateurs</a>
+                {% endif %}
+            <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+            {% endif %}
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon openbtn" onclick="openNav()"></span>
+        </button>
+        <!-- principal navbar -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {% if app.user %}
+                <li class="nav-item {% if current_menu is defined and current_menu == 'articles_active'%}active{% endif %}">
+                    <a class="nav-link" href="{{ path('articles_index') }}">Articles</a>
+                </li>
+                <li class="nav-item {% if current_menu is defined and current_menu == 'prospects_active'%}active{% endif %}">
+                    <a class="nav-link" href="{{ path('prospects_index') }}">Clients</a>
+                </li>
+                <li class="nav-item {% if current_menu is defined and current_menu == 'reservations_active'%}active{% endif %}">
+                    <a class="nav-link" href="{{ path('reservations_index') }}">Réservations</a>
+                </li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <li class="nav-item {% if current_menu is defined and current_menu == 'users_active'%}active{% endif %}">
+                            <a class="nav-link" href="{{ path('users_index') }}">Utilisateurs</a>
+                        </li>
+                    {% endif %}
+                {% endif %}
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="btn btn-secondary ml-3" href="{{ path('logout') }}">Déconnexion</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</section>
+<!-- END principal navbar -->
+
+{% block body %}{% endblock %}
+{% block footer %}
+    <!-- Pied de page -->
+    <footer class="bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                   {% if app.user %}
+                       {% if 'ROLE_SUPER_ADMIN' == app.user.category %}
+                           <p class="text-right mr-5 text-white">Type de connexion : {{ app.user.category ? "super administrateur" }}.</p>
+                       {% endif %}
+                       {% if 'ROLE_ADMIN' == app.user.category %}
+                           <p class="text-right mr-5 text-white">Type de connexion : {{ app.user.category ? "administrateur" }}.</p>
+                       {% endif %}
+                       {% if 'ROLE_MAINTENANCE' == app.user.category %}
+                           <p class="text-right mr-5 text-white">Type de connexion : {{ app.user.category ? "maintenance" }}.</p>
+                       {% endif %}
+                       {% if 'ROLE_COMMERCIAL' == app.user.category %}
+                           <p class="text-right mr-5 text-white">Type de connexion : {{ app.user.category ? "commercial" }}.</p>
+                       {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12 my-3">
+                    <p class="text-white">&copy; Medi Service 2019</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}
+
+<!------------------------------ internal JS import ----------------------------------------->
+<script src="{{ asset('js/script.js') }}"></script>
+{% block javascripts %}{% endblock %}
+
+</body>
+</html>

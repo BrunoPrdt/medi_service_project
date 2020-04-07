@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles - index{% endblock %}
+
+{% block body %}
+    <section class="vert text-white pt-5">
+
+        <a class="btn btn-primary float-right" href="{{ path('articles_new') }}">Créer un nouvel article</a>
+        <h1 class="ml-2 my-1">Articles - index</h1>
+
+        <table class="table text-white">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Reference</th>
+                <th>SerialNumber</th>
+                <th>Etat</th>
+                <th>Disponibilité</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for article in articles %}
+                <tr>
+                    <td>{{ article.name }}</td>
+                    <td>{{ article.type }}</td>
+                    <td>{{ article.reference }}</td>
+                    <td>{{ article.serialNumber }}</td>
+                    <td>{{ article.materialState }}</td>
+                    <td>{{ article.availability }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{{ path('articles_show', {'id': article.id}) }}">Voir l'article</a>
+                        <a class="btn btn-primary" href="{{ path('articles_edit', {'id': article.id}) }}">Editer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">Aucun résultat</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+{% endblock %}

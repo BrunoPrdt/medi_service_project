@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservations{% endblock %}
+
+{% block body %}
+
+    <section class="vert text-white pt-3">
+        <div class="container-fluid">
+
+            <h1 class="text-white my-3">Reservations</h1>
+
+            <table class="table text-white">
+                <tbody>
+                <tr>
+                    <th>Utilisateur</th>
+                    <td>{{ reservation.user }}</td>
+                </tr>
+                <tr>
+                    <th>Client</th>
+                    <td>{{ reservation.prospect }}</td>
+                </tr>
+                <tr>
+                    <th>Article</th>
+                    <td>{{ reservation.article }}</td>
+                </tr>
+                <tr>
+                    <th>Date de reservation</th>
+                    <td>{{ reservation.reservationDate ? reservation.reservationDate|date('d-m-Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Début du prêt</th>
+                    <td>{{ reservation.loanDate ? reservation.loanDate|date('d-m-Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Fin du prêt</th>
+                    <td>{{ reservation.returnDate ? reservation.returnDate|date('d-m-Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Date de retour</th>
+                    <td>{{ reservation.realReturnDate ? reservation.realReturnDate|date('d-m-Y') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Date de disponibilité</th>
+                    <td>{{ reservation.availabilityDate ? reservation.availabilityDate|date('d-m-Y') : '' }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <a class="btn btn-secondary" href="{{ path('reservations_index') }}">Retour à la liste</a>
+
+            <a class="btn btn-primary" href="{{ path('reservations_edit', {'id': reservation.id}) }}">Editer</a>
+
+            {{ include('admin/reservations/_delete_form.html.twig') }}
+        </div>
+    </section>
+
+{% endblock %}

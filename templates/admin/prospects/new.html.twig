@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau prospect{% endblock %}
+
+{% block body %}
+    <section class="vert text-white pt-5">
+        <div class="container-fluid">
+            <h1 class="ml-2 my-3">Créer un nouveau prospect</h1>
+
+            {{ include('admin/prospects/_form.html.twig') }}
+
+            <a class="btn btn-secondary my-3" href="{{ path('prospects_index') }}">Retour à la liste</a>
+        </div>
+    </section>
+{% endblock %}

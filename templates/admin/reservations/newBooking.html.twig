@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+    {% block stylesheets %}
+
+    {% endblock %}
+
+{% block title %}Réserver l'article{% endblock %}
+
+{% block body %}
+
+    <section class="vert text-white pt-5">
+        <div class="container-fluid">
+            <h1 class="ml-2 my-3">Réserver l'article : {{ article.name }}</h1>
+
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {{ include('admin/reservations/_formBooking.html.twig') }}
+
+            <a class="btn btn-secondary my-3" href="{{ path('reservations_index') }}">Aller à la liste des réservations</a>
+        </div>
+    </section>
+
+    {% block javascripts %}
+        <script>
+            //     start date picker when DOM ready
+            $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+            $(document).ready(function () {
+                $('#booking_loanDate, #booking_viewDate').datepicker({
+                    format: 'dd/mm/yyyy',
+                    datesDisabled: [
+                        {% for day in article.notAvailableDays %}
+                            "{{ day.format('d/m/Y') }}",
+                        {% endfor %}
+                    ],
+                    startDate: new Date()
+                });
+            })
+        </script>
+    {% endblock %}
+{% endblock %}
+
+

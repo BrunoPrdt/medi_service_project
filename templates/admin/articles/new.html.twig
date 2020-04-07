@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvel article{% endblock %}
+
+{% block body %}
+
+    <section class="vert text-white pt-5">
+        <div class="container-fluid">
+            <h1 class="ml-2 my-3">Créer un nouvel article</h1>
+
+            {{ include('admin/articles/_form.html.twig', {'button_label': 'Valider'}) }}
+
+            <a class="btn btn-secondary my-3" href="{{ path('articles_index') }}">Retour à la liste</a>
+        </div>
+    </section>
+
+{% endblock %}

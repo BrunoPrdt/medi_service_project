@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservations - index{% endblock %}
+
+{% block body %}
+    <section class="vert text-white pt-5">
+        <h1 class="ml-2 my-1">Réservations de {{ app.user }} (id {{ app.user.id }} )</h1>
+
+        <table class="table text-white">
+            <thead>
+            <tr>
+                <th>Utilisateur</th>
+                <th>Client</th>
+                <th>Article</th>
+                <th>Date de réservation</th>
+                <th>Début du prêt</th>
+                <th>Fin du prêt</th>
+                <th>Date de retour</th>
+                <th>Disponible le:</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.user }}</td>
+                    <td>{{ reservation.prospect }}</td>
+                    <td>{{ reservation.article }}</td>
+                    <td>{{ reservation.reservationDate ? reservation.reservationDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ reservation.loanDate ? reservation.loanDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ reservation.returnDate ? reservation.returnDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ reservation.returnDate ? reservation.realReturnDate|date('d-m-Y') : '' }}</td>
+                    <td>{{ reservation.returnDate ? reservation.availabilityDate|date('d-m-Y') : '' }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{{ path('reservations_show', {'id': reservation.id}) }}">Voir la réservation</a>
+                        <a class="btn btn-primary" href="{{ path('reservations_edit', {'id': reservation.id}) }}">Editer</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun résultat</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

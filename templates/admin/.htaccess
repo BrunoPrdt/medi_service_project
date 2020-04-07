@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Espace administrateur"
+AuthUserFile /wamp64/www/medi_service_symfony/medi_service/templates/admin/.htpasswd
+Require valid-user

@@ -1,0 +1,53 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="form-group col-md-4">
+        {{ form_label(form.name, 'Nom : ') }} {{ form_widget(form.name, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.name) }}</small>
+    </div>
+    <div class="form-group col-md-4">
+        {{ form_label(form.type, 'Type : ') }} {{ form_widget(form.type, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.type) }}</small>
+    </div>
+    <div class="form-group col-md-4">
+        {{ form_label(form.reference, 'Référence : ') }} {{ form_widget(form.reference, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.reference) }}</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-4">
+        {{ form_label(form.serialNumber, 'Numéro de série : ') }} {{ form_widget(form.serialNumber, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.serialNumber) }}</small>
+    </div>
+    <div class="form-group col-md-4">
+        {{ form_label(form.materialState, 'Etat : ') }} {{ form_widget(form.materialState, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.materialState) }}</small>
+    </div>
+    <div class="form-group col-md-4">
+        {{ form_label(form.availability, 'Disponible : ') }} {{ form_widget(form.availability, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.availability) }}</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-8">
+        {{ form_label(form.description, 'Description : ') }} {{ form_widget(form.description, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.description) }}</small>
+    </div>
+    <div class="form-group col-md-2">
+        {{ form_label(form.options, 'Options : ') }} {{ form_widget(form.options) }}
+        <small>{{ form_help(form.options) }}</small>
+    </div>
+
+</div>
+
+    <button class="btn btn-primary">{{ button_label|default('Enregistrer') }}</button>
+{{ form_end(form) }}

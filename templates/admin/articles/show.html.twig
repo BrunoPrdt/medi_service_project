@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Articles{% endblock %}
+
+{% block body %}
+
+    <section class="vert text-white pt-3">
+        <div class="container-fluid">
+            <a class="btn btn-secondary float-right" href="{{ path('article_reservation', {'id': article.id}) }}">Réserver ! </a>
+            <h1 class="text-white my-3">Articles {{ article.name }}</h1>
+
+            <div class="row">
+
+                <div class="col col-md-6">
+                    <table class="table text-white">
+                        <tbody>
+                        <tr>
+                            <th>Nom</th>
+                            <td>{{ article.name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Type</th>
+                            <td>{{ article.type }}</td>
+                        </tr>
+                        <tr>
+                            <th>Reference</th>
+                            <td>{{ article.reference }}</td>
+                        </tr>
+                        <tr>
+                            <th>SerialNumber</th>
+                            <td>{{ article.serialNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Etat du matériel</th>
+                            <td>{{ article.materialState }}</td>
+                        </tr>
+                        <tr>
+                            <th>Article disponible ?</th>
+                            <td>{{ article.availability }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col col-md-6">
+                    <table class="table text-white">
+                        <tbody>
+                        <tr>
+                            <th>Manuel</th>
+                            <td>{{ article.options }}</td>
+                        </tr>
+                        <tr>
+                            <th>Description</th>
+                            <td>{{ article.description }}</td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><img src="{{ article.img }}" alt="import d'image html" style="width: 30vw"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <a class="btn btn-secondary" href="{{ path('articles_index') }}">Retour à la liste</a>
+
+            <a class="btn btn-primary" href="{{ path('articles_edit', {'id': article.id}) }}">Editer</a>
+
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+            {% elseif is_granted('ROLE_MAINTENANCE') %}
+                {{ include('admin/articles/_delete_form.html.twig') }}
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

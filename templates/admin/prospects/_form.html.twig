@@ -1,0 +1,44 @@
+{{ form_start(form) }}
+
+<div class="row">
+    <div class="form-group col-md-6">
+        {{ form_label(form.name, 'Nom : ') }} {{ form_widget(form.name, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.name) }}</small>
+    </div>
+    <div class="form-group col-md-6">
+        {{ form_label(form.mail, 'Mail : ') }} {{ form_widget(form.mail, {"attr": {
+            "placeholder" : "Ex : test@test.com, min 10 caractères"}}) }}
+        <small>{{ form_help(form.mail) }}</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        {{ form_label(form.address, 'Votre adresse') }} {{ form_widget(form.address, {"attr": {
+            "placeholder" : "Minimum 10 caractères"}}) }}
+        <small>{{ form_help(form.address) }}</small>
+    </div>
+    <div class="form-group col-md-6">
+        {{ form_label(form.zipCode, 'Code postal') }} {{ form_widget(form.zipCode, {"attr": {
+            "placeholder" : "Nombre uniquement"}}) }}
+        <small>{{ form_help(form.zipCode) }}</small>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group col-md-6">
+        {{ form_label(form.city, 'Ville') }} {{ form_widget(form.city, {"attr": {
+            "placeholder" : "Minimum 2 caractères"}}) }}
+        <small>{{ form_help(form.city) }}</small>
+    </div>
+
+    <div class="form-group col-md-6">
+        {{ form_label(form.phone, 'Téléphone') }} {{ form_widget(form.phone, {"attr": {
+            "placeholder" : "Téléphone"}}) }}
+        <small>{{ form_help(form.phone) }}</small>
+    </div>
+</div>
+
+    <button class="btn btn-primary">{{ button_label|default('Enregister') }}</button>
+{{ form_end(form) }}
